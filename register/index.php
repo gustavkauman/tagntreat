@@ -20,23 +20,24 @@ if (isset($_GET['type'])) {
     <div class="row">
         <form action="regAdmin.php" method="POST">
             <div class="row">
-                Navn: <input type="text" name="name" id="name">
+                Navn: <input type="text" name="navn" id="navn">
             </div>
             <div class="row">
-                Klasse: <input type="text" name="class" id="class">
+                Klasse: <input type="text" name="klasse" id="klasse">
             </div>
             <div class="row">
                 Kodeord: <input type="password" name="password" id="password">
             </div>
             <div class="row">
-                Bekræft kodeord: <input type="password" name="conf" id="conf">
+                Bekræft kodeord: <input type="password" name="confpwd" id="confpwd">
             </div>
             <div class="row">
-                <input type="button" name="btn-submit" id="btn-submit" value="Submit!" onclick="return regformhash(this.form,
-                    this.name,
-                    this.class,
-                    this.password,
-                    this.conf);">
+                <input type="button" name="btn-submit" id="btn-submit" value="Submit!" onclick="return regformhash(
+                    this.form,
+                    this.form.navn,
+                    this.form.klasse,
+                    this.form.password,
+                    this.form.confpwd);">
             </div>
         </form>
     </div>

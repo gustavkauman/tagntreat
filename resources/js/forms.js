@@ -15,12 +15,12 @@ function formhash(form, password) {
     form.submit();
 }
 
-function regformhash(form, uid, name, class, password, conf) {
+function regformhash(form, navn, klasse, password, confpwd) {
      // Check each field has a value
-    if (uid.value == ''         ||
-          name.value == ''      ||
+    if (  navn.value == ''      ||
+          klasse.value == ''    ||
           password.value == ''  ||
-          conf.value == '') {
+          confpwd.value == '') {
 
         alert('You must provide all the requested details. Please try again');
         return false;
@@ -29,7 +29,7 @@ function regformhash(form, uid, name, class, password, conf) {
     // Check the username
 
     re = /^\w+$/;
-    if(!re.test(form.username.value)) {
+    if(!re.test(form.navn.value)) {
         alert("Username must contain only letters, numbers and underscores. Please try again");
         form.username.focus();
         return false;
@@ -54,7 +54,7 @@ function regformhash(form, uid, name, class, password, conf) {
     }
 
     // Check password and confirmation are the same
-    if (password.value != conf.value) {
+    if (password.value != confpwd.value) {
         alert('Your password and confirmation do not match. Please try again');
         form.password.focus();
         return false;
@@ -71,7 +71,7 @@ function regformhash(form, uid, name, class, password, conf) {
 
     // Make sure the plaintext password doesn't get sent.
     password.value = "";
-    conf.value = "";
+    confpwd.value = "";
 
     // Finally submit the form.
     form.submit();
