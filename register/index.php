@@ -1,10 +1,19 @@
+<?php
+if (isset($_GET['type'])) {
+        $type = $_GET['type'];
+} else {
+        $type = '';
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Tag 'n Treat :: Register</title>
 </head>
 <body>
-<?php if ($_GET['type'] == "admin") : ?>
+<?php if ($type == "admin") : ?>
+    <script type="text/javascript" src="../resources/js/forms.js"></script>
+    <script type="text/javascript" src="../resources/js/sha512.js"></script>
     <div class="row">
         <h4>Registrer ny administrator</h4>
     </div>
@@ -31,8 +40,6 @@
             </div>
         </form>
     </div>
-    <script type="text/javascript" src="../resources/js/forms.js"></script>
-    <script type="text/javascript" src="../resources/js/sha512.js"></script>
 <?php else : ?>
     <div class="row">
         <h4>Registrer ny spiller</h4>
@@ -46,7 +53,7 @@
                 Klasse: <input type="text" name="class">
             </div>
             <div class="row">
-                <input type="submit" name="submit" value="submit">
+                <input type="submit" name="submit" value="Submit!">
             </div>
         </form>
     </div>
