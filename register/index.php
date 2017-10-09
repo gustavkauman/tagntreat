@@ -12,13 +12,14 @@ if (isset($_GET['type'])) {
 </head>
 <body>
 <?php if ($type == "admin") : ?>
-    <script type="text/javascript" src="../resources/js/forms.js"></script>
-    <script type="text/javascript" src="../resources/js/sha512.js"></script>
     <div class="row">
         <h4>Registrer ny administrator</h4>
     </div>
     <div class="row">
         <form action="regAdmin.php" method="POST">
+            <div class="row">
+                Brugernavn: <input type="text" name="u_name" id="u_name">
+            </div>
             <div class="row">
                 Navn: <input type="text" name="navn" id="navn">
             </div>
@@ -34,6 +35,7 @@ if (isset($_GET['type'])) {
             <div class="row">
                 <input type="button" name="btn-submit" id="btn-submit" value="Submit!" onclick="return regformhash(
                     this.form,
+                    this.form.u_name,
                     this.form.navn,
                     this.form.klasse,
                     this.form.password,
@@ -59,5 +61,7 @@ if (isset($_GET['type'])) {
         </form>
     </div>
 <?php endif; ?>
+<script type="text/javascript" src="../resources/js/forms.js"></script>
+<script type="text/javascript" src="../resources/js/sha512.js"></script>
 </body>
 </html>
