@@ -1,4 +1,9 @@
 <?php
+include_once '../includes/db_connect.php';
+include_once '../includes/functions.php';
+
+sec_session_start();
+
 if (isset($_GET['type'])) {
         $type = $_GET['type'];
 } else {
@@ -44,6 +49,7 @@ if (isset($_GET['type'])) {
         </form>
     </div>
 <?php else : ?>
+<?php if (login_check($mysqli) == true) : ?>
     <div class="row">
         <h4>Registrer ny spiller</h4>
     </div>
@@ -60,6 +66,9 @@ if (isset($_GET['type'])) {
             </div>
         </form>
     </div>
+<?php else : ?>
+<p>Du bør ikke være her! Log ind <a href="../login">her</a>.</p>
+<?php endif; ?>
 <?php endif; ?>
 <script type="text/javascript" src="../resources/js/forms.js"></script>
 <script type="text/javascript" src="../resources/js/sha512.js"></script>

@@ -27,8 +27,8 @@ function sec_session_start() {
     $httponly = true;
 
     // Forces sessions to only use cookies.
-    if (ini_set('session.use_only_cookies', 1) === FALSE) {
-        header('Location: /error.php?err=Could not initiate a safe session (ini_set)');
+    if (ini_set('session.use_only_cookies', 1) === false) {
+        header("Location: ../error.php?err=Could not initiate a safe session (ini_set)");
         exit();
     }
 
@@ -43,12 +43,11 @@ function sec_session_start() {
     session_regenerate_id();    // regenerated the session, delete the old one.
 }
 
-function login($u_name, $password, $mysqli) {
+function login($u_name, $password, $mysqli)
+{
     // Using prepared statements means that SQL injection is not possible.
-    if ($stmt = $mysqli->prepare('SELECT id, u_name, password, salt
-				  FROM admin
-                                  WHERE u_name = ? LIMIT 1')) {
-        $stmt->bind_param('s', $u_name);  // Bind '$email' to parameter.
+    if ($stmt = $mysqli->prepare("SELECT id, u_name, password, salt FROM admin WHERE u_name = ? LIMIT 1")) {
+        $stmt->bind_param('s', $u_name);  // Bind "$email" to parameter.
         $stmt->execute();    // Execute the prepared query.
         $stmt->store_result();
 
@@ -57,30 +56,33 @@ function login($u_name, $password, $mysqli) {
         $stmt->fetch();
 
         // hash the password with the unique salt.
+        error_log($password);
         $password = hash('sha512', $password . $salt);
         if ($stmt->num_rows == 1) {
             // If the user exists we check if the account is locked
             // from too many login attempts
-            if (checkbrute($user_id, $mysqli) == true) {
+            if (checkbrute($id, $mysqli) == true) {
                 // Account is locked
                 // Send an email to user saying their account is locked
                 return false;
             } else {
                 // Check if the password in the database matches
                 // the password the user submitted.
+                error_log($password);
+                error_log($db_password);
                 if ($db_password == $password) {
                     // Password is correct!
                     // Get the user-agent string of the user.
                     $user_browser = $_SERVER['HTTP_USER_AGENT'];
 
                     // XSS protection as we might print this value
-                    $user_id = preg_replace("/[^0-9]+/", '', $user_id);
-                    $_SESSION['user_id'] = $user_id;
+                    $id = preg_replace("/[^0-9]+/", "", $id);
+                    $_SESSION['id'] = $id;
 
                     // XSS protection as we might print this value
-                    $username = preg_replace("/[^a-zA-Z0-9_\-]+/", '', $username);
+                    $u_name = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $u_name);
 
-                    $_SESSION['username'] = $username;
+                    $_SESSION['u_name'] = $u_name;
                     $_SESSION['login_string'] = hash('sha512', $password . $user_browser);
 
                     // Login successful.
@@ -89,8 +91,8 @@ function login($u_name, $password, $mysqli) {
                     // Password is not correct
                     // We record this attempt in the database
                     $now = time();
-                    if (!$mysqli->query("INSERT INTO login_attempts(user_id, time) VALUES ('$user_id', '$now')")) {
-                        header('Location: /error.php?err=Database error: login_attempts');
+                    if (!$mysqli->query("INSERT INTO login_attempts (id, time) VALUES ('$id', '$now')")) {
+                        header("Location: ../error.php?err=Database error: login_attempts");
                         exit();
                     }
 
@@ -108,17 +110,16 @@ function login($u_name, $password, $mysqli) {
     }
 }
 
-function checkbrute($user_id, $mysqli) {
+function checkbrute($id, $mysqli)
+{
     // Get timestamp of current time
     $now = time();
 
     // All login attempts are counted from the past 2 hours.
     $valid_attempts = $now - (2 * 60 * 60);
 
-    if ($stmt = $mysqli->prepare("SELECT time
-                                  FROM login_attempts
-                                  WHERE user_id = ? AND time > '$valid_attempts'")) {
-        $stmt->bind_param('i', $user_id);
+    if ($stmt = $mysqli->prepare("SELECT `time` FROM login_attempts WHERE id = ? AND `time` > '$valid_attempts'")) {
+        $stmt->bind_param('i', $id);
 
         // Execute the prepared query.
         $stmt->execute();
@@ -139,19 +140,17 @@ function checkbrute($user_id, $mysqli) {
 
 function login_check($mysqli) {
     // Check if all session variables are set
-    if (isset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['login_string'])) {
-        $user_id = $_SESSION['user_id'];
+    if (isset($_SESSION['id'], $_SESSION['u_name'], $_SESSION['login_string'])) {
+        $id = $_SESSION['id'];
         $login_string = $_SESSION['login_string'];
-        $username = $_SESSION['username'];
+        $u_name = $_SESSION['u_name'];
 
         // Get the user-agent string of the user.
         $user_browser = $_SERVER['HTTP_USER_AGENT'];
 
-        if ($stmt = $mysqli->prepare('SELECT password
-				      FROM members
-				      WHERE id = ? LIMIT 1')) {
-            // Bind '$user_id' to parameter.
-            $stmt->bind_param('i', $user_id);
+        if ($stmt = $mysqli->prepare("SELECT password FROM admin WHERE id = ? LIMIT 1")) {
+            // Bind "$user_id" to parameter.
+            $stmt->bind_param('i', $id);
             $stmt->execute();   // Execute the prepared query.
             $stmt->store_result();
 

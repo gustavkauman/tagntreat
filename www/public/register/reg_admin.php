@@ -7,9 +7,9 @@ $error_msg = "";
 $u_name = filter_input(INPUT_POST, 'u_name', FILTER_SANITIZE_STRING);
 $navn = filter_input(INPUT_POST, 'navn', FILTER_SANITIZE_STRING);
 $klasse = filter_input(INPUT_POST, 'klasse', FILTER_SANITIZE_STRING);
-$pwd = filter_input(INPUT_POST, 'p', FILTER_SANITIZE_STRING);
+$password = filter_input(INPUT_POST, 'p', FILTER_SANITIZE_STRING);
 
-if (strlen($pwd) != 128) {
+if (strlen($password) != 128) {
     $error_msg .= 'Invalid password configuration.';
 }
 
@@ -35,9 +35,13 @@ if (empty($error_msg)) {
         throw new \Exception('Database error: ' . (!$stmt ? $mysqli->error : $stmt->error));
     } else {
         $stmt->close();
-        header("Location: /register/index.php?succes=true");
+        header("Location: ../login/index.php?succes=true");
         exit();
     }
+    $stmt->close();
+        header("Location: ../login/index.php?succes=true");
+        exit();
+}
     $stmt->close();
     header("Location: /register/index.php?succes=true");
     exit();

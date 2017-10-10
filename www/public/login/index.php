@@ -14,6 +14,7 @@ sec_session_start();
     <div class="row">
         <h4>Administrator Login</h4>
     </div>
+<?php if (login_check($mysqli) == false) : ?>
     <div class="row">
         <form action="../includes/process_login.php" method="POST">
             <div class="row">
@@ -23,10 +24,15 @@ sec_session_start();
                 Kodeord: <input type="password" name="password" id="password">
             </div>
             <div class="row">
-                <input type="button" value="Login!" onclick="formhash(this.form, this.form.password);">
+                <input type="button" value="Login!" onclick="formhash(
+                    this.form,
+                    this.form.password);">
             </div>
         </form>
     </div>
+<?php else : ?>
+<p>Du er allerede logget in. Vil du <a href="../includes/logout.php">logge ud?</a></p>
+<?php endif; ?>
 <script type="text/javascript" src="/resources/js/forms.js"></script>
 <script type="text/javascript" src="/resources/js/sha512.js"></script>
 </body>
