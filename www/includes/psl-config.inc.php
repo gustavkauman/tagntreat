@@ -5,4 +5,4 @@ define('PASSWORD', 'root');
 define('DATABASE', 'tagntreat');
 define('SECURE', false);
 define("CAN_REGISTER", "any");
-define("DEFAULT_ROLE", "member")
+define("DEFAULT_ROLE", "member");
