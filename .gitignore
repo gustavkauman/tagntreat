@@ -1,6 +1,6 @@
 .sass-cache
 node_modules
-www/includes/psl-config.inc.php
+#www/includes/psl-config.inc.php
 *.sublime-project
 *.sublime-workspace
 .*
