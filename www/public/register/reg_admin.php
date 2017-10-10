@@ -8,6 +8,10 @@ $u_name = filter_input(INPUT_POST, 'u_name', FILTER_SANITIZE_STRING);
 $navn = filter_input(INPUT_POST, 'navn', FILTER_SANITIZE_STRING);
 $klasse = filter_input(INPUT_POST, 'klasse', FILTER_SANITIZE_STRING);
 $password = filter_input(INPUT_POST, 'p', FILTER_SANITIZE_STRING);
+$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+if (!$email = filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $error_msg .= 'Email is not valid!';
+}
 
 if (strlen($password) != 128) {
     $error_msg .= 'Invalid password configuration.';
@@ -30,8 +34,8 @@ if (empty($error_msg)) {
     $random_salt = hash('sha512', uniqid(openssl_random_pseudo_bytes(16), true));
     $password = hash('sha512', $password . $random_salt);
 
-    $stmt = $mysqli->prepare('INSERT INTO `admins` (`Username`, `Name`, `Classroom`, `Password`, `Salt`) VALUES (?, ?, ?, ?, ?)');
-    if (!$stmt || !$stmt->bind_param('sssss', $u_name, $navn, $klasse, $password, $random_salt) || !$stmt->execute()) {
+    $stmt = $mysqli->prepare('INSERT INTO `admins` (`Username`, `Name`, `email`, `Classroom`, `Password`, `Salt`) VALUES (?, ?, ?, ?, ?, ?)');
+    if (!$stmt || !$stmt->bind_param('ssssss', $u_name, $navn, $email, $klasse, $password, $random_salt) || !$stmt->execute()) {
         throw new \Exception('Database error: ' . (!$stmt ? $mysqli->error : $stmt->error));
     } else {
         $stmt->close();

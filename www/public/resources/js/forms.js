@@ -15,11 +15,12 @@ function formhash(form, password) {
     form.submit();
 }
 
-function regformhash(form, u_name, navn, klasse, password, confpwd) {
+function regformhash(form, u_name, navn, klasse, email, password, confpwd) {
      // Check each field has a value
-    if (  u_name.value == ''      ||
+    if (  u_name.value == ''    ||
           navn.value == ''      ||
           klasse.value == ''    ||
+          email.value == ''     ||
           password.value == ''  ||
           confpwd.value == '') {
 
