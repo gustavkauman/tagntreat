@@ -47,7 +47,7 @@ function sec_session_start()
 function login($u_name, $password, $mysqli)
 {
     // Using prepared statements means that SQL injection is not possible.
-    if ($stmt = $mysqli->prepare("SELECT id, u_name, password, salt FROM admin WHERE u_name = ? LIMIT 1")) {
+    if ($stmt = $mysqli->prepare("SELECT `ID`, `Username`, `Password`, `Salt` FROM `admins` WHERE `Username` = ? LIMIT 1")) {
         $stmt->bind_param('s', $u_name);  // Bind "$email" to parameter.
         $stmt->execute();    // Execute the prepared query.
         $stmt->store_result();
@@ -57,7 +57,6 @@ function login($u_name, $password, $mysqli)
         $stmt->fetch();
 
         // hash the password with the unique salt.
-        error_log($password);
         $password = hash('sha512', $password . $salt);
         if ($stmt->num_rows == 1) {
             // If the user exists we check if the account is locked
@@ -69,8 +68,6 @@ function login($u_name, $password, $mysqli)
             } else {
                 // Check if the password in the database matches
                 // the password the user submitted.
-                error_log($password);
-                error_log($db_password);
                 if ($db_password == $password) {
                     // Password is correct!
                     // Get the user-agent string of the user.
@@ -92,7 +89,7 @@ function login($u_name, $password, $mysqli)
                     // Password is not correct
                     // We record this attempt in the database
                     $now = time();
-                    if (!$mysqli->query("INSERT INTO login_attempts (id, time) VALUES ('$id', '$now')")) {
+                    if (!$mysqli->query("INSERT INTO `login_attempts` (`UserID`, `Time`) VALUES ('$id', '$now')")) {
                         header("Location: ../error.php?err=Database error: login_attempts");
                         exit();
                     }
@@ -106,8 +103,7 @@ function login($u_name, $password, $mysqli)
         }
     } else {
         // Could not create a prepared statement
-        header('Location: /error.php?err=Database error: cannot prepare statement');
-        exit();
+        throw new \Exception('Database error: ' . (!$stmt ? $mysqli->error : $stmt->error));
     }
 }
 
@@ -119,7 +115,7 @@ function checkbrute($id, $mysqli)
     // All login attempts are counted from the past 2 hours.
     $valid_attempts = $now - (2 * 60 * 60);
 
-    if ($stmt = $mysqli->prepare("SELECT `time` FROM login_attempts WHERE id = ? AND `time` > '$valid_attempts'")) {
+    if ($stmt = $mysqli->prepare("SELECT `Time` FROM `login_attempts` WHERE `UserID` = ? AND `Time` > '$valid_attempts'")) {
         $stmt->bind_param('i', $id);
 
         // Execute the prepared query.
@@ -133,9 +129,7 @@ function checkbrute($id, $mysqli)
             return false;
         }
     } else {
-        // Could not create a prepared statement
-        header('Location: /error.php?err=Database error: cannot prepare statement');
-        exit();
+        throw new \Exception('Database error: ' . (!$stmt ? $mysqli->error : $stmt->error));
     }
 }
 
@@ -150,7 +144,7 @@ function login_check($mysqli)
         // Get the user-agent string of the user.
         $user_browser = $_SERVER['HTTP_USER_AGENT'];
 
-        if ($stmt = $mysqli->prepare("SELECT password FROM admin WHERE id = ? LIMIT 1")) {
+        if ($stmt = $mysqli->prepare("SELECT `Password` FROM `admins` WHERE `ID` = ? LIMIT 1")) {
             // Bind "$user_id" to parameter.
             $stmt->bind_param('i', $id);
             $stmt->execute();   // Execute the prepared query.

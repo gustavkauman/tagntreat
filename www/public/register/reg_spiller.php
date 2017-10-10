@@ -7,7 +7,7 @@ if (login_check($mysqli) == true) {
     $klasse = filter_input(INPUT_POST, 'klasse', FILTER_SANITIZE_STRING);
 
     if (isset($navn, $klasse)) {
-        $stmt = $mysqli->prepare('INSERT INTO players (navn, klasse) VALUES (?, ?)');
+        $stmt = $mysqli->prepare('INSERT INTO `players` (`Name`, `Classroom`) VALUES (?, ?)');
         if (!$stmt || !$stmt->bind_param('ss', $navn, $klasse) || !$stmt->execute()) {
             throw new \Exception('Database error: ' . (!$stmt ? $mysqli->error : $stmt->error));
         } else {
