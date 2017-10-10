@@ -32,6 +32,9 @@ if (isset($_GET['type'])) {
                 Klasse: <input type="text" name="klasse" id="klasse">
             </div>
             <div class="row">
+                Email: <input type="email" name="email" id="email">
+            </div>
+            <div class="row">
                 Kodeord: <input type="password" name="password" id="password">
             </div>
             <div class="row">
@@ -43,6 +46,7 @@ if (isset($_GET['type'])) {
                     this.form.u_name,
                     this.form.navn,
                     this.form.klasse,
+                    this.form.email,
                     this.form.password,
                     this.form.confpwd);">
             </div>
