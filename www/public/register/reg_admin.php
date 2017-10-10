@@ -1,6 +1,6 @@
 <?php
-    include_once "../includes/db_connect.php";
-    include_once "../includes/functions.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/db_connect.inc.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/functions.inc.php';
 
 
 $error_msg = "";
@@ -35,13 +35,13 @@ if (empty($error_msg)) {
         throw new \Exception('Database error: ' . (!$stmt ? $mysqli->error : $stmt->error));
     } else {
         $stmt->close();
-        header("Location: ../register/index.php?succes=true");
+        header("Location: /register/index.php?succes=true");
         exit();
     }
     $stmt->close();
-    header("Location: ../register/index.php?succes=true");
+    header("Location: /register/index.php?succes=true");
     exit();
 } else {
-    header("Location: ../register/error.php?error=$error_msg");
+    header("Location: /register/error.php?error=$error_msg");
     exit();
 }

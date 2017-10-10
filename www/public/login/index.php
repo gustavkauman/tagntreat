@@ -1,6 +1,6 @@
 <?php
-include_once "../includes/functions.php";
-include_once "../includes/db_connect.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/db_connect.inc.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/functions.inc.php';
 
 sec_session_start();
 
@@ -27,7 +27,7 @@ sec_session_start();
             </div>
         </form>
     </div>
-<script type="text/javascript" src="../resources/js/forms.js"></script>
-<script type="text/javascript" src="../resources/js/sha512.js"></script>
+<script type="text/javascript" src="/resources/js/forms.js"></script>
+<script type="text/javascript" src="/resources/js/sha512.js"></script>
 </body>
 </html>

@@ -16,7 +16,7 @@ if (isset($_GET['type'])) {
         <h4>Registrer ny administrator</h4>
     </div>
     <div class="row">
-        <form action="regAdmin.php" method="POST">
+        <form action="reg_admin.php" method="POST">
             <div class="row">
                 Brugernavn: <input type="text" name="u_name" id="u_name">
             </div>
