@@ -5,8 +5,7 @@
   "author": "Gustav Utke Kauman",
   "devDependencies": {
     "gulp-ruby-sass": "^2.1.1",
-    "gulp-sourcemaps": "^2.6.0",
-    "gulp-webserver": "^0.9.1",
+    "gulp-sourcemaps": "^2.6.1",
     "jshint": "^2.9.5",
     "jshint-stylish": "^2.2.1"
   },
