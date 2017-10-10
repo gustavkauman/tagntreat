@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `admins` (
 
 CREATE TABLE IF NOT EXISTS `login_attempts` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Time` int(11) NOT NULL DEFAULT,
+  `Time` int(11) NOT NULL,
   `UserID` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -62,6 +62,20 @@ CREATE TABLE IF NOT EXISTS `players` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(64) COLLATE utf8_bin NOT NULL,
   `Classroom` varchar(8) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `game`
+--
+
+CREATE TABLE IF NOT EXISTS `game` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `killerID` int(11) NOT NULL,
+  `victimID` int(11) NOT NULL,
+  `completed` int(11) NOT NULL DEFAULT 0
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
