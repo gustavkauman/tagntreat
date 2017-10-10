@@ -54,12 +54,12 @@ if (isset($_GET['type'])) {
         <h4>Registrer ny spiller</h4>
     </div>
     <div class="row">
-        <form action="regSpiller.php" method="POST">
+        <form action="reg_spiller.php" method="POST">
             <div class="row">
                 Navn: <input type="text" name="name">
             </div>
             <div class="row">
-                Klasse: <input type="text" name="class">
+                Klasse: <input type="text" name="klasse">
             </div>
             <div class="row">
                 <input type="submit" name="submit" value="Submit!">

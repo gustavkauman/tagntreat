@@ -19,7 +19,8 @@
 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/psl-config.inc.php';
 
-function sec_session_start() {
+function sec_session_start()
+{
     $session_name = 'sec_session_id';   // Set a custom session name
     $secure = SECURE;
 
@@ -138,7 +139,8 @@ function checkbrute($id, $mysqli)
     }
 }
 
-function login_check($mysqli) {
+function login_check($mysqli)
+{
     // Check if all session variables are set
     if (isset($_SESSION['id'], $_SESSION['u_name'], $_SESSION['login_string'])) {
         $id = $_SESSION['id'];
@@ -182,7 +184,8 @@ function login_check($mysqli) {
     }
 }
 
-function esc_url($url) {
+function esc_url($url)
+{
 
     if ('' == $url) {
         return $url;
