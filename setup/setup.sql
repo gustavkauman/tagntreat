@@ -19,6 +19,8 @@ SET GLOBAL time_zone = "+02:00";
 --
 -- Database: `tagntreat`
 --
+
+-- DROP DATABASE `tagntreat`;
 CREATE DATABASE IF NOT EXISTS `tagntreat` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
 USE `tagntreat`;
 
@@ -71,11 +73,11 @@ CREATE TABLE IF NOT EXISTS `players` (
 -- Table structure for table `game`
 --
 
-CREATE TABLE IF NOT EXISTS `game` (
+CREATE TABLE IF NOT EXISTS `games` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `killerID` int(11) NOT NULL,
-  `victimID` int(11) NOT NULL,
-  `completed` int(11) NOT NULL DEFAULT 0
+  `KillerID` int(11) NOT NULL,
+  `VictimID` int(11) NOT NULL,
+  `Completed` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 

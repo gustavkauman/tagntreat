@@ -6,8 +6,8 @@ $script = <<SCRIPT
 apt-get update
 apt-get -yq upgrade
 
-mkdir /usr/share/phpmyadmin
-mkdir /etc/phpmyadmin
+mkdir -p /usr/share/phpmyadmin
+mkdir -p /etc/phpmyadmin
 
 mv /tmp/setup/phpmyadmin-apache.conf /etc/phpmyadmin/apache.conf
 mv /tmp/setup/phpmyadmin-export.php /usr/share/phpmyadmin/export.php
