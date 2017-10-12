@@ -5,6 +5,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/functions.inc.php';
 
 $error_msg = "";
 $u_name = filter_input(INPUT_POST, 'u_name', FILTER_SANITIZE_STRING);
+$u_name = strtolower($u_name);
 $navn = filter_input(INPUT_POST, 'navn', FILTER_SANITIZE_STRING);
 $klasse = filter_input(INPUT_POST, 'klasse', FILTER_SANITIZE_STRING);
 $password = filter_input(INPUT_POST, 'p', FILTER_SANITIZE_STRING);
