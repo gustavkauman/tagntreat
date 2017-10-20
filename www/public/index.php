@@ -32,17 +32,19 @@ $players_top_10 = array_slice($players_with_points, 0, 10);
 <div class="tables row">
     <div class="col span_1_of_2">
         <table class="top10">
-            <tr><td class="table-title"><h2>Top<?php echo (count($players_with_points) >= 10) ? ' 10' : '' ?></h2></td></tr>
+            <tr><th class="table-title" colspan="3"><h2>Top<?php echo (count($players_with_points) >= 10) ? ' 10' : '' ?></h2></th></tr>
+            <tr><th>Navn</th><th>Klasse</th><th>Point</th></tr>
             <?php foreach ($players_top_10 as $player) {?>
-            <tr><td><?php echo $player['name'];?>, <?php echo $player['classroom'];?> - <?php echo $player['points'];?></td></tr>
+            <tr><td><?php echo $player['name'];?></td><td><?php echo $player['classroom'];?></td><td><?php echo $player['points'];?></td></tr>
             <?php }?>
         </table>
     </div>
     <div class="col span_1_of_2">
         <table class="players">
-            <tr><td class="table-title"><h2>Levende Spillere</h2></td></tr>
+            <tr><th class="table-title" colspan="2"><h2>Levende spillere</h2></th></tr>
+            <tr><th>Navn</th><th>Klasse</th></tr>
             <?php foreach ($players_alive as $player) {?>
-            <tr><td><?php echo $player['name'];?>, <?php echo $player['classroom'];?></td></tr>
+            <tr><td><?php echo $player['name'];?></td><td><?php echo $player['classroom'];?></td></tr>
             <?php }?>
         </table>
     </div>
