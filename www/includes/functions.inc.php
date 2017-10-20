@@ -17,7 +17,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/psl-config.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/psl-config.inc.php';
+
+function html_header($title) {
+    echo <<<EOD
+<!DOCTYPE html>
+<html lang="dk">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="resources/css/style.css">
+    <title>Tag 'n Treat :: $title</title>
+</head>
+<body>
+EOD;
+}
+
+function html_footer() {
+    echo <<<EOD
+</body>
+</html>
+EOD;
+}
 
 function sec_session_start()
 {
@@ -209,4 +229,28 @@ function esc_url($url)
     } else {
         return $url;
     }
+}
+
+function only_admins($mysqli) {
+    sec_session_start();
+
+    if (login_check($mysqli) != true) {
+        show_error("You're not an admin. Go away!");
+    }
+}
+
+function throw_error($stmt, $mysqli) {
+    throw new \Exception('Database error: ' . (!$stmt ? $mysqli->error : $stmt->error));
+}
+
+function show_error($msg) {
+    echo("<p style='color:red'>$msg</p>");
+    # This function MUST exit as it's last thing!!!
+    exit();
+}
+
+function show_success($msg) {
+    echo("<p style='color:green'>$msg</p>");
+    # This function MUST exit as it's last thing!!!
+    exit();
 }

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/db_connect.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/db_connect.inc.php';
 
 $error_msg = "";
 

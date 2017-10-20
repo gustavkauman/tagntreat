@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/functions.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/functions.inc.php';
 sec_session_start();
 
 // Unset all session values

@@ -1,6 +1,6 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/db_connect.inc.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/functions.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/db_connect.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/functions.inc.php';
 
 sec_session_start();
 
