@@ -249,7 +249,8 @@ function show_error($msg) {
     exit();
 }
 
-function show_success($msg) {
+function show_success($msg, $url) {
+    header("Location: $url");
     echo("<p style='color:green'>$msg</p>");
     # This function MUST exit as it's last thing!!!
     exit();

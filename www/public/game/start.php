@@ -48,4 +48,4 @@ for ($i=0; $i < $id_count; $i++) {
 	game_create($killer_ids[$i], $victim_ids[$i]);
 }
 
-header('Location: /succes.php');
+show_success('Successfully started game!', '/game');
