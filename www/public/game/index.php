@@ -96,4 +96,4 @@ if ($stmt->num_rows !== 0) :?>
         <?php }?>
     </div>
 <?php endif;$stmt->close();?>
-<?php html_footer();?>
+<?php html_footer();
