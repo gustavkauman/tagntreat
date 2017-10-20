@@ -20,7 +20,7 @@ if ($stmt->num_rows === 0) :?>
 <?php elseif ($stmt->num_rows === 1) : ?>
     <?php $stmt->fetch(); ?>
     <div class="row">
-        <h4>Spillet er slut. Vinderen var <?php echo "{$players[$killer_id]['name']} fra {$players[$killer_id]['classroom']}"; ?>. Stop det <a href='/game/delete.php'>her</a></h4>
+        <h4>Spillet er slut. Den sidste levende var <?php echo "{$players[$killer_id]['name']} fra {$players[$killer_id]['classroom']}"; ?>. Stop det <a href='/game/delete.php'>her</a></h4>
     </div>
 <?php else: ?>
     <div class="row">
@@ -50,7 +50,7 @@ if ($stmt->num_rows === 0) :?>
 
 
 <?php
-$stmt = $mysqli->prepare('SELECT `KillerID`, `VictimID`, `Status` FROM `games` WHERE `Status` = "PICTURE" OR `Status` = "VIDEO" ORDER BY `ID` ASC');
+$stmt = $mysqli->prepare('SELECT `KillerID`, `VictimID`, `Status` FROM `games` WHERE `Status` = "PICTURE" OR `Status` = "VIDEO" ORDER BY `ID` DESC');
 if (!$stmt || !$stmt->bind_result($killer_id, $victim_id, $status) || !$stmt->execute() || !$stmt->store_result()) {
     throw_error($stmt, $mysqli);
 }

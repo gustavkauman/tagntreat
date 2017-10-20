@@ -20,6 +20,9 @@ function get_points($id) {
     $_killer_id = $id;
     $get_points_stmt->execute();
     $get_points_stmt->store_result();
+    if ($get_points_stmt->num_rows === 0) {
+        return null;
+    }
     $points = 0;
     while ($get_points_stmt->fetch()) {
         switch ($_status) {

@@ -36,13 +36,11 @@ shuffle($killer_ids); // Not cryptographically suitable :'(
 /*
 Example:
 killer_ids = [0, 1, 2, 3, 4]
-shift_amount = 3
 
 Result:
 victim_ids = [3, 4, 0, 1, 2]
 */
-$shift_amount = rand(1, $id_count - 1);
-$victim_ids = array_merge(array_slice($killer_ids, $shift_amount), array_slice($killer_ids, 0, $shift_amount));
+$victim_ids = array_merge(array_slice($killer_ids, 1), array_slice($killer_ids, 0, 1));
 
 for ($i=0; $i < $id_count; $i++) {
 	game_create($killer_ids[$i], $victim_ids[$i]);
