@@ -75,3 +75,13 @@ function get_players($more_data) {
     $stmt->close();
     return $players;
 }
+
+
+function is_started() {
+    global $mysqli;
+    $stmt = $mysqli->prepare('SELECT `ID` FROM `games`');
+    if (!$stmt || !$stmt->execute() || !$stmt->store_result()) {
+        throw_error($stmt, $mysqli);
+    }
+    return ($stmt->num_rows !== 0);
+}

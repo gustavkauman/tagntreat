@@ -39,6 +39,11 @@ $players_alive = array_filter($players, function($val) {
 <div class="row">
     <h2 class="thing">Tag and Treat</h2>
 </div>
+<?php if (!is_started()):?>
+    TODO: Something to say if the game is not started yet
+<?php elseif (count($players_alive) <= 1):?>
+    TODO: Something to say if the game is finished
+<?php else:?>
 <div class="tables row">
     <div class="col span_1_of_2">
         <table class="top10">
@@ -52,7 +57,6 @@ $players_alive = array_filter($players, function($val) {
             <?php endif;?>
         </table>
     </div>
-<?php if (count($players_alive) > 1):?>
     <div class="col span_1_of_2">
         <table class="players">
             <tr><td class="table-title"><h2>Levende Spillere</h2></td></tr>
@@ -61,9 +65,7 @@ $players_alive = array_filter($players, function($val) {
             <?php }?>
         </table>
     </div>
-<?php else:?>
-    Todo: A congratz to the winner &amp; last man standing
-<?php endif;?>
 </div>
+<?php endif;?>
 
 <?php html_footer();
