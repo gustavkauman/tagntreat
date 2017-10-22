@@ -92,5 +92,9 @@ $players_alive = array_filter($players, function($val) {
     </div>
 </div>
 <?php endif;?>
-
+<footer>
+    <div class="row">
+        Copyright &copy; Gefion Programming <img src="/resources/img/gefionprog_logo.png"> &#8212; Gustav &amp; Mads. All rights reserved
+    </div>
+</footer>
 <?php html_footer();

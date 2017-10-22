@@ -34,11 +34,6 @@ EOD;
 
 function html_footer() {
     echo <<<EOD
-<footer>
-    <div class="row">
-        Copyright &copy; Gefion Programming &#8212; Gustav &amp; Mads. All rights reserved
-    </div>
-</footer>
 </body>
 </html>
 EOD;
