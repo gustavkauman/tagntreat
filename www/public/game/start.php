@@ -27,7 +27,7 @@ $stmt->close();
 
 $id_count = count($killer_ids);
 if ($id_count < 2) {
-    throw new \Exception('The amount of people in the database should be at least two!');
+    show_error('The amount of people in the database should be at least two!');
 }
 
 
