@@ -25,6 +25,10 @@ SCRIPT
 # apt-get -y install phpmyadmin;LINE='Include /etc/phpmyadmin/apache.conf';FILE=/etc/apache2/apache2.conf;grep -qF "$LINE" "$FILE" || echo "$LINE" >> "$FILE";service apache2 reload
 # Answer `apache`, choose "N" to keep the current version, answer yes/blank to all other prompts, and input the root mysql password as `root`
 
+# To reset the database, run:
+# mysql -u "root" "-proot" -e "DROP DATABASE tagntreat;"
+# And the run the provision again!
+
 Vagrant.configure("2") do |config|
 
     config.vm.box = "scotch/box"

@@ -1,6 +1,17 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/db_connect.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/functions.inc.php';
+sec_session_start();
+
+$stmt = $mysqli->prepare('SELECT `ID` FROM `admins`');
+if (!$stmt || !$stmt->execute()) {
+    throw new \Exception('Database error: ' . (!$stmt ? $mysqli->error : $stmt->error));
+}
+
+// Allows the first admin to be created without credentials, but all subsequent admins must be created using another admin account!
+if ($stmt->num_rows > 0 && login_check($mysqli) != true) {
+    show_error("You're not an admin. Go away!");
+}
 
 
 $error_msg = "";

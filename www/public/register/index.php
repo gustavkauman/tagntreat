@@ -9,8 +9,8 @@ if (isset($_GET['type'])) {
 } else {
         $type = '';
 }
-?>
-<!DOCTYPE html>
+
+?><!DOCTYPE html>
 <html>
 <head>
     <title>Tag 'n Treat :: Register</title>

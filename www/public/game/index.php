@@ -17,6 +17,16 @@ if ($stmt->num_rows === 0) :?>
     <div class="row">
         <h4>Spillet er ikke blevet startet endnu. Start det <a href="/game/start.php">her</a></h4>
     </div>
+    <div class="row">
+        <h4>Spillere:</h4>
+    </div>
+    <div class="holder">
+        <?php foreach ($players as $player) {?>
+        <div class="row">
+            <span><?php echo "{$player['name']}, {$player['classroom']}"; ?></span>
+        </div>
+        <?php }?>
+    </div>
 <?php elseif ($stmt->num_rows === 1) : ?>
     <?php $stmt->fetch(); ?>
     <div class="row">
