@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/functions.inc.php';
 sec_session_start();
 
 $stmt = $mysqli->prepare('SELECT `ID` FROM `admins`');
-if (!$stmt || !$stmt->execute()) {
+if (!$stmt || !$stmt->execute() || !$stmt->store_result()) {
     throw new \Exception('Database error: ' . (!$stmt ? $mysqli->error : $stmt->error));
 }
 
