@@ -9,7 +9,6 @@ if (isset($_GET['refresh'])) {
     header("Refresh: $refresh");
 }
 
-html_header('Traditionsudvalget');
 
 $players = get_players(true);
 $players = array_filter($players, function($val) {
@@ -25,7 +24,15 @@ $players_top_10 = array_slice($players_with_points, 0, 10);
 $players_alive = array_filter($players, function($val) {
     return !$val['is_dead'];
 });
-?>
+
+?><!DOCTYPE html>
+<html lang="dk">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+    <title>Tag 'n Treat :: Traditionsudvalget</title>
+</head>
+<body>
 <div class="row logo">
     <img src="resources/img/traditionsudvalg_logo.png">
 </div>

@@ -13,6 +13,8 @@ if (!$stmt || !$stmt->bind_result($killer_id, $victim_id) || !$stmt->execute() |
     throw_error($stmt, $mysqli);
 }
 
+$game_started = !($stmt->num_rows === 0);
+
 if ($stmt->num_rows === 0) :?>
     <div class="row">
         <h4>Spillet er ikke blevet startet endnu. Start det <a href="/game/start.php">her</a></h4>
@@ -101,12 +103,18 @@ if ($stmt->num_rows !== 0) :?>
         <h4>Spillere:</h4>
     </div>
     <div class="holder">
-        <?php foreach ($players as $player) {?>
+        <?php foreach ($players as $player_id => $player) {?>
         <div class="row">
-            <span><?php echo "{$player['name']}, {$player['classroom']}"; ?></span>
+            <form action="/register/del_player.php" method="POST">
+                <input type="hidden" name="user_id" value="<?php echo $player_id; ?>">
+
+                <span><?php echo "{$player['name']}, {$player['classroom']}"; ?></span>
+                <input type="submit" value="Slet"<?php echo ($game_started) ? ' disabled="true"' : ''; ?>>
+            </form>
         </div>
         <?php }?>
     </div>
+    <a href="/register/">Tilføj nye spillere her</a>
 <?php
 $stmt = $mysqli->prepare('SELECT `Name`, `Classroom`, `Email` FROM `admins`');
 if (!$stmt || !$stmt->bind_result($admin_name, $admin_classroom, $admin_email) || !$stmt->execute() || !$stmt->store_result()) {
@@ -118,10 +126,13 @@ if (!$stmt || !$stmt->bind_result($admin_name, $admin_classroom, $admin_email) |
     </div>
     <div class="holder">
         <?php while ($stmt->fetch()) {?>
-        <div class="row" style="border: 1px solid black;display: inline;">
+        <div class="row">
             <span><?php echo "$admin_name, $admin_classroom, $admin_email"; ?></span>
         </div>
         <?php }?>
     </div>
+    <br>
+    <br>
+    <a href="/login/logout.php">Log ud</a>
 
 <?php html_footer();

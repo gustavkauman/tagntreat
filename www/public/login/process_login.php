@@ -10,7 +10,7 @@ if (isset($_POST['u_name'], $_POST['p'])) {
 
     if (login($u_name, $password, $mysqli) == true) {
         // Login success
-        show_success('Successfully logged in', '/register/');
+        show_success('Successfully logged in', '/game/');
     } else {
         // Login failed
         show_error('Login failed');

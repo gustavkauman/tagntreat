@@ -25,7 +25,7 @@ function html_header($title) {
 <html lang="dk">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="resources/css/style.css">
+    <!--<link rel="stylesheet" type="text/css" href="/resources/css/style.css">-->
     <title>Tag 'n Treat :: $title</title>
 </head>
 <body>
@@ -216,7 +216,7 @@ function show_error($msg) {
 
 function show_success($msg, $url) {
     if ($url) {
-        header("Location: $url");
+        header("Refresh: 1;$url");
     }
     echo("<p style='color:green'>$msg</p>");
     # This function MUST exit as it's last thing!!!

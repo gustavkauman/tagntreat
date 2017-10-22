@@ -14,7 +14,7 @@ sec_session_start();
     <div class="row">
         <h4>Administrator Login</h4>
     </div>
-<?php if (login_check($mysqli) == false) : ?>
+<?php if (login_check($mysqli) === false) : ?>
     <div class="row">
         <form action="/login/process_login.php" method="POST">
             <div class="row">

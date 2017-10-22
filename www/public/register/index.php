@@ -70,6 +70,7 @@ if (isset($_GET['type'])) {
             </div>
         </form>
     </div>
+    <a href="/game/">Tilbage til admin-siden</a>
 <?php else : ?>
 <p>Du bør ikke være her! Log ind <a href="/login/">her</a>.</p>
 <?php endif; ?>
