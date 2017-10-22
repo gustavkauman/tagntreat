@@ -16,7 +16,7 @@ sec_session_start();
     </div>
 <?php if (login_check($mysqli) == false) : ?>
     <div class="row">
-        <form action="process_login.php" method="POST">
+        <form action="/login/process_login.php" method="POST">
             <div class="row">
                 Brugernavn: <input type="text" name="u_name" id="u_name">
             </div>
@@ -31,7 +31,7 @@ sec_session_start();
         </form>
     </div>
 <?php else : ?>
-<p>Du er allerede logget in. Vil du <a href="logout.php">logge ud?</a></p>
+<p>Du er allerede logget in. Vil du <a href="/login/logout.php">logge ud?</a></p>
 <?php endif; ?>
 <script type="text/javascript" src="/resources/js/forms.js"></script>
 <script type="text/javascript" src="/resources/js/sha512.js"></script>

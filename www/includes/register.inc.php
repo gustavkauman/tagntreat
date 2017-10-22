@@ -18,6 +18,7 @@
  */
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/db_connect.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../includes/functions.inc.php';
 
 $error_msg = "";
 
@@ -29,14 +30,14 @@ if (isset($_POST['username'], $_POST['email'], $_POST['p'])) {
     $email = filter_var($email, FILTER_VALIDATE_EMAIL);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         // Not a valid email
-        $error_msg .= '<p class="error">The email address you entered is not valid</p>';
+        $error_msg .= 'The email address you entered is not valid';
     }
 
     $password = filter_input(INPUT_POST, 'p', FILTER_SANITIZE_STRING);
     if (strlen($password) != 128) {
         // The hashed pwd should be 128 characters long.
         // If it's not, something really odd has happened
-        $error_msg .= '<p class="error">Invalid password configuration.</p>';
+        $error_msg .= 'Invalid password configuration.';
     }
 
     // Username validity and password validity have been checked client side.
@@ -54,10 +55,10 @@ if (isset($_POST['username'], $_POST['email'], $_POST['p'])) {
 
         if ($stmt->num_rows == 1) {
             // A user with this email address already exists
-            $error_msg .= '<p class="error">A user with this email address already exists.</p>';
+            $error_msg .= 'A user with this email address already exists.';
         }
     } else {
-        $error_msg .= '<p class="error">Database error</p>';
+        $error_msg .= 'Database error';
     }
 
     // TODO:
@@ -77,11 +78,13 @@ if (isset($_POST['username'], $_POST['email'], $_POST['p'])) {
             $insert_stmt->bind_param('ssss', $username, $email, $password, $random_salt);
             // Execute the prepared query.
             if (! $insert_stmt->execute()) {
-                header('Location: /error.php?err=Registration failure: INSERT');
-                exit();
+                show_error('Registration failure: INSERT');
             }
         }
-        header('Location: ./register_success.php');
-        exit();
+        show_success('Successfully registered');
+    } else {
+        show_error($error_msg);
     }
 }
+
+show_error('Missing parameters');

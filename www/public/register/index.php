@@ -21,7 +21,7 @@ if (isset($_GET['type'])) {
         <h4>Registrer ny administrator</h4>
     </div>
     <div class="row">
-        <form action="reg_admin.php" method="POST">
+        <form action="/register/reg_admin.php" method="POST">
             <div class="row">
                 Brugernavn: <input type="text" name="u_name" id="u_name">
             </div>
@@ -71,7 +71,7 @@ if (isset($_GET['type'])) {
         </form>
     </div>
 <?php else : ?>
-<p>Du bør ikke være her! Log ind <a href="../login">her</a>.</p>
+<p>Du bør ikke være her! Log ind <a href="/login/">her</a>.</p>
 <?php endif; ?>
 <?php endif; ?>
 <script type="text/javascript" src="../resources/js/forms.js"></script>

@@ -40,10 +40,8 @@ if (empty($error_msg)) {
         throw new \Exception('Database error: ' . (!$stmt ? $mysqli->error : $stmt->error));
     } else {
         $stmt->close();
-        header("Location: /login/index.php?succes=true");
-        exit();
+        show_success('Registration successful', '/login/');
     }
 } else {
-    header("Location: /register/error.php?error=$error_msg");
-    exit();
+    show_error($error_msg);
 }

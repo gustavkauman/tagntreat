@@ -14,12 +14,12 @@ if (login_check($mysqli) == true) {
             throw new \Exception('Database error: ' . (!$stmt ? $mysqli->error : $stmt->error));
         } else {
             $stmt->close();
-            header("Location: ../register");
+            show_success('Successfully registered user!', '/register/');
             exit();
         }
     } else {
-        echo("Missing info!");
+        show_error('Missing info!');
     }
 } else {
-    echo("Login fail");
+    show_error("Login fail");
 }

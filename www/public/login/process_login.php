@@ -10,12 +10,11 @@ if (isset($_POST['u_name'], $_POST['p'])) {
 
     if (login($u_name, $password, $mysqli) == true) {
         // Login success
-        header('Location: ../register');
+        show_success('Successfully logged in', '/register/');
     } else {
         // Login failed
-        header('Location: ../index.php?error=1');
+        show_error('Login failed');
     }
-} else {
-    // The correct POST variables were not sent to this page.
-    echo 'Invalid Request';
 }
+
+show_error('Invalid request');
