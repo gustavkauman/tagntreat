@@ -6,7 +6,7 @@ if (isset($_GET['refresh'])) {
     if ($refresh < 1) {
         show_error('The "refresh" parameter was incorrectly set!');
     }
-    header("Refresh: $refresh");
+    //header("Refresh: $refresh");
 }
 
 
@@ -31,10 +31,13 @@ $players_alive = array_filter($players, function($val) {
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
     <title>Tag 'n Treat :: Traditionsudvalget</title>
+    <?php if (isset($refresh)): ?>
+        <script type="text/javascript">setTimeout(function(){document.location = '/'}, 1000*<?php echo $refresh; ?>);</script>
+    <?php endif ?>
 </head>
 <body>
 <div class="row logo">
-    <img src="resources/img/traditionsudvalg_logo.png">
+    <img src="/resources/img/traditionsudvalg_logo.png">
 </div>
 <div class="row">
     <h2 class="thing">Tag and Treat</h2>
