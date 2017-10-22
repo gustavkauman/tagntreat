@@ -17,16 +17,6 @@ if ($stmt->num_rows === 0) :?>
     <div class="row">
         <h4>Spillet er ikke blevet startet endnu. Start det <a href="/game/start.php">her</a></h4>
     </div>
-    <div class="row">
-        <h4>Spillere:</h4>
-    </div>
-    <div class="holder">
-        <?php foreach ($players as $player) {?>
-        <div class="row">
-            <span><?php echo "{$player['name']}, {$player['classroom']}"; ?></span>
-        </div>
-        <?php }?>
-    </div>
 <?php elseif ($stmt->num_rows === 1) : ?>
     <?php $stmt->fetch(); ?>
     <div class="row">
@@ -106,4 +96,32 @@ if ($stmt->num_rows !== 0) :?>
         <?php }?>
     </div>
 <?php endif;$stmt->close();?>
+
+    <div class="row">
+        <h4>Spillere:</h4>
+    </div>
+    <div class="holder">
+        <?php foreach ($players as $player) {?>
+        <div class="row">
+            <span><?php echo "{$player['name']}, {$player['classroom']}"; ?></span>
+        </div>
+        <?php }?>
+    </div>
+<?php
+$stmt = $mysqli->prepare('SELECT `Name`, `Classroom`, `Email` FROM `admins`');
+if (!$stmt || !$stmt->bind_result($admin_name, $admin_classroom, $admin_email) || !$stmt->execute() || !$stmt->store_result()) {
+    throw_error($stmt, $mysqli);
+}
+?>
+    <div class="row">
+        <h4>Admins:</h4>
+    </div>
+    <div class="holder">
+        <?php while ($stmt->fetch()) {?>
+        <div class="row" style="border: 1px solid black;display: inline;">
+            <span><?php echo "$admin_name, $admin_classroom, $admin_email"; ?></span>
+        </div>
+        <?php }?>
+    </div>
+
 <?php html_footer();
