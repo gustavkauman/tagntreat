@@ -31,7 +31,7 @@ function regformhash(form, u_name, navn, klasse, email, password, confpwd) {
     // Check the username
 
     re = /^\w+$/;
-    if(!re.test(form.navn.value)) {
+    if(!re.test(form.u_name.value)) {
         alert("Username must contain only letters, numbers and underscores. Please try again");
         form.username.focus();
         return false;
