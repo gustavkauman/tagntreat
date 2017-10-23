@@ -14,11 +14,11 @@ $players = get_players(true);
 $players = array_filter($players, function($val) {
     return $val['points'] !== null;
 });
-uasort($players, function($a, $b) {
-    return $a['points'] < $b['points'];
-});
 $players_with_points = array_filter($players, function($val) {
     return $val['points'];
+});
+uasort($players_with_points, function($a, $b) {
+    return $a['points'] < $b['points'];
 });
 $players_top_10 = array_slice($players_with_points, 0, 10);
 $players_alive = array_filter($players, function($val) {
@@ -84,7 +84,7 @@ $players_alive = array_filter($players, function($val) {
     </div>
     <div class="col span_1_of_2">
         <table class="players">
-            <tr><td class="table-title"><h2>Levende Spillere</h2></td></tr>
+            <tr><td class="table-title"><h2>Levende Spillere (<?php echo count($players_alive); ?>)</h2></td></tr>
             <?php foreach ($players_alive as $player) :?>
             <tr><td><?php echo $player['name'];?>, <?php echo $player['classroom'];?></td></tr>
             <?php endforeach;?>

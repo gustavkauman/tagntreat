@@ -56,7 +56,7 @@ function is_dead($id) {
 
 function get_players($more_data) {
     global $mysqli;
-    $stmt = $mysqli->prepare('SELECT * FROM `players`');
+    $stmt = $mysqli->prepare('SELECT * FROM `players` ORDER BY `Classroom`, `Name`');
     if (!$stmt || !$stmt->bind_result($id, $name, $classroom) || !$stmt->execute() || !$stmt->store_result()) {
         throw_error($stmt, $mysqli);
     }

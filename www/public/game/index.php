@@ -28,25 +28,32 @@ if ($stmt->num_rows === 0) :?>
     <div class="row">
         <h4>Nutidige</h4>
     </div>
-    <div class="holder">
+    <table class="holder">
+        <tr>
+            <th>Morder</th>
+            <th>Offer</th>
+            <th>Rediger</th>
+        </tr>
         <?php while ($stmt->fetch()) {?>
-        <div class="row">
+        <tr class="row">
             <form action="/game/set_status.php" method="POST">
                 <input type="hidden" name="killer_id" value="<?php echo $players[$killer_id]['id']; ?>">
                 <input type="hidden" name="victim_id" value="<?php echo $players[$victim_id]['id']; ?>">
 
-                <span>Morder: <?php echo "{$players[$killer_id]['name']}, {$players[$killer_id]['classroom']}"; ?></span>
-                <span>Offer: <?php echo "{$players[$victim_id]['name']}, {$players[$victim_id]['classroom']}"; ?></span>
-                <select name="status">
-                    <option value="PENDING" selected>Ikke udført</option>
-                    <option value="PICTURE">Dræbt med billede</option>
-                    <option value="VIDEO">Dræbt med video</option>
-                </select>
-                <input type="submit" value="Gem">
+                <td><?php echo "{$players[$killer_id]['name']}, {$players[$killer_id]['classroom']}"; ?></td>
+                <td><?php echo "{$players[$victim_id]['name']}, {$players[$victim_id]['classroom']}"; ?></td>
+                <td>
+                    <select name="status">
+                        <option value="PENDING" selected>Ikke udført</option>
+                        <option value="PICTURE">Dræbt med billede</option>
+                        <option value="VIDEO">Dræbt med video</option>
+                    </select>
+                    <input type="submit" value="Gem">
+                </td>
             </form>
-        </div>
+        </tr>
         <?php }?>
-    </div>
+    </table>
 <?php endif;$stmt->close();?>
 
 
