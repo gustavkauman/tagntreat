@@ -200,7 +200,7 @@ function only_admins($mysqli) {
     sec_session_start();
 
     if (login_check($mysqli) != true) {
-        show_error("You're not an admin. Go away!");
+        show_error('You\'re not logged in. Please do so <a href="/login/">here</a>');
     }
 }
 
