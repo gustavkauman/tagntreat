@@ -32,7 +32,7 @@ $players_alive = array_filter($players, function($val) {
     <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
     <title>Tag 'n Treat :: Traditionsudvalget</title>
     <?php if (isset($refresh)) : ?>
-        <script type="text/javascript">setTimeout(function(){document.location = document.location;}, 1000*<?php echo $refresh; ?>);</script>
+        <script type="text/javascript">setTimeout(function(){window.location.reload();}, 1000*<?php echo $refresh; ?>);</script>
     <?php endif ?>
 </head>
 <body>
