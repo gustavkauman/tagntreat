@@ -26,7 +26,7 @@ if ($stmt->num_rows === 0) :?>
     </div>
 <?php else: ?>
     <div class="row">
-        <h4>Nutidige</h4>
+        <h2>Spil</h2>
     </div>
     <table class="holder">
         <tr>
@@ -77,7 +77,7 @@ while ($stmt->fetch()) {
 
 if ($stmt->num_rows !== 0) :?>
     <div class="row">
-        <h4>Tidligere</h4>
+        <h2>Tidligere</h2>
     </div>
     <div class="holder">
         <?php foreach ($kills as $killer_id => $kill) {?>
@@ -107,7 +107,7 @@ if ($stmt->num_rows !== 0) :?>
 <?php endif;$stmt->close();?>
 
     <div class="row">
-        <h4>Spillere:</h4>
+        <h2>Deltagere:</h2>
     </div>
     <div class="holder">
         <?php foreach ($players as $player_id => $player) {?>
@@ -129,7 +129,7 @@ if (!$stmt || !$stmt->bind_result($admin_name, $admin_classroom, $admin_email) |
 }
 ?>
     <div class="row">
-        <h4>Admins:</h4>
+        <h2>Admins:</h2>
     </div>
     <div class="holder">
         <?php while ($stmt->fetch()) {?>

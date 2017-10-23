@@ -75,7 +75,7 @@ $players_alive = array_filter($players, function($val) {
             <tr><td class="table-title"><h2>Top<?php echo (count($players_with_points) >= 10) ? ' 10' : '' ?></h2></td></tr>
         <?php if (count($players_with_points) > 0) :?>
             <?php foreach ($players_top_10 as $player) :?>
-            <tr><td><?php echo $player['name'];?>, <?php echo $player['classroom'];?> - <?php echo $player['points'];?></td></tr>
+            <tr><td><?php echo $player['name'];?>, <?php echo $player['classroom'];?> - <?php echo $player['points'];?> points</td></tr>
             <?php endforeach;?>
         <?php else :?>
             <tr><td>Ingen spillere endnu</td></tr>
