@@ -22,7 +22,7 @@ if ($stmt->num_rows === 0) :?>
 <?php elseif ($stmt->num_rows === 1) : ?>
     <?php $stmt->fetch(); ?>
     <div class="row">
-        <h4>Spillet er slut. Den sidste levende var <?php echo "{$players[$killer_id]['name']} fra {$players[$killer_id]['classroom']}"; ?>. Stop det <a href='/game/delete.php'>her</a></h4>
+        <h4>Spillet er slut. Den sidste levende var <?php echo "{$players[$killer_id]['name']} fra {$players[$killer_id]['classroom']}"; ?>. SLET det <a href='/game/delete.php'>her</a></h4>
     </div>
 <?php else: ?>
     <div class="row">
